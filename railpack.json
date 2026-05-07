@@ -1,14 +1,19 @@
 {
   "$schema": "https://schema.railpack.com",
   "packages": {
+    "php": "8.3",
     "node": "22"
   },
-
-"build": [
-    "npm run build",
-    "mkdir -p storage/framework/{sessions,views,cache,testing} storage/logs bootstrap/cache && chmod -R a+rw storage",
-    "php artisan config:cache",
-    "php artisan event:cache",
-    "php artisan route:cache"
-  ]
+  "steps": {
+    "build": {
+      "commands": [
+        "...",
+        "mkdir -p storage/framework/sessions storage/framework/views storage/framework/cache storage/framework/cache/data storage/framework/testing storage/logs bootstrap/cache",
+        "chmod -R ug+rw storage bootstrap/cache"
+      ]
+    }
+  },
+  "deploy": {
+    "startCommand": "bash ./scripts/railway-start.sh"
+  }
 }
